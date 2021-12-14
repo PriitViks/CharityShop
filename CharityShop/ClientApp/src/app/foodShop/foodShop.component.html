@@ -1,0 +1,83 @@
+<h1 id="tableLabel">Shop items</h1>
+<p *ngIf="!shopItems"><em>Loading...</em></p>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutAlign="stretch">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let shopItem of shopItems">
+      <mat-card class="mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title>{{ shopItem.itemName }} </mat-card-title>
+          <mat-card-subtitle>{{ shopItem.quantity }} left</mat-card-subtitle>
+        </mat-card-header>
+        <a (click)="this.addToBasket(shopItem)">
+          <img mat-card-image src="../../assets/images/{{shopItem.picture}}" alt="Photo of a {{shopItem.itemName}}" height="300" [ngClass]="{'crayOut' : shopItem.quantity == 0}">
+        </a>
+        <mat-card-content>
+          <p>
+            <span>{{ shopItem.itemName }} </span>
+            <span>{{ shopItem.price | currency:'EUR' }}</span>
+          </p>
+          <p>{{this.quantityInBasket(shopItem)}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div *ngIf="this.canBeRemoved(shopItem)">
+            <button mat-raised-button color="warn" (click)="this.removeFromBasket(shopItem)">Remove from basket</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="h4" style="margin:15px">Customer basket information</div>
+<table class='table table-striped' aria-labelledby="tableLabel" style="margin-top:10px; margin-bottom:15px">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let basketItem of itemsInBasket">
+      <td>{{ basketItem.itemName }}</td>
+      <td>{{ basketItem.quantity }}</td>
+      <td>{{ basketItem.price | currency:'EUR' }}</td>
+      <td>{{ basketItem.quantity * basketItem.price | currency:'EUR'}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">Totals</th>
+      <td></td>
+      <td></td>
+      <td>{{getOrderTotalSum() | currency:'EUR'}}</td>
+    </tr>
+  </tfoot>
+</table>
+
+<form [formGroup]="checkoutForm" style="margin-top:10px; margin-bottom:15px"  >
+  <div class="form-group row">
+    <label for="paid" class="col-sm-2 col-form-label">Customer paid</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control text-md-end" [(ngModel)]="customerPaidAmount" formControlName="paid">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Change to Customer</label>
+    <div class="col-sm-10">
+      <label class="form-control-plaintext text-md-end">
+        {{moneyToReturnCustomer | currency:'EUR'}}
+      </label>
+    </div>
+  </div>
+  <div>
+  </div>
+  <span style="white-space: pre-line" class="form-control-plaintext text-md-end">
+    {{returnedCurrency}}
+  </span>
+  <div *ngIf="itemsInBasket.length>0" style="margin-top: 10px; margin-bottom:15px">
+    <button mat-raised-button color="warn" type="button" (click)="cancelOrder()">Cancel order</button>
+    <button mat-raised-button color="primary" type="button" class="float-md-end" (click)="customerPaid()">Purchase</button>
+  </div>
+</form>

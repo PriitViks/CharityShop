@@ -1,0 +1,43 @@
+<h1 id="tableLabel">Update item stock</h1>
+
+<div fxLayout="column" fxLayoutAlign="start left" class="update-upload">
+  <form id="updateFormHtml" fxLayout="row" fxLayoutAlign="left center" #updateForm="ngForm" (submit)="uploadFile()">
+    <div class="file-dropzone">
+      <label for="file" class="text">Upload shop item configuration Json here</label>
+      <input id="file" type="file" accept=".json" (change)="setChosenFile($event)" />
+    </div>
+  </form>
+  <div *ngIf="chosenFileName" fxLayout="column" fxLayoutAlign="start left" class="file-info">
+    <div class="file-name">{{ chosenFileName }}</div>
+    <button form="updateFormHtml" mat-raised-button color="primary">Upload</button>
+  </div>
+</div>
+
+<p *ngIf="!shopItems"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="shopItems">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th class="text-md-end">Quantity</th>
+      <th class="text-md-end">Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let shopItem of shopItems">
+      <td>
+        {{ shopItem.itemName }}
+      </td>
+      <td>
+        {{ shopItem.price | currency:'EUR'  }}
+      </td>
+      <td>
+        <input type="number" class="form-control text-md-end" name="newQuantity" [(ngModel)]="shopItem.quantity" />
+      </td>
+      <td>
+        <button mat-raised-button color="primary" type="button" class="float-md-end" (click)="updateItems(shopItem)">Update</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

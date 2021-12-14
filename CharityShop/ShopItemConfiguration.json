@@ -1,0 +1,74 @@
+[
+    {
+        "id": 4,
+        "itemName": "Apple tart",
+        "category": 0,
+        "price": 1.5,
+        "quantity": 60,
+        "picture": "Apple tart.jpg"
+    },
+    {
+        "id": 1,
+        "itemName": "Brownie",
+         "category": 0,
+        "price": 0.65,
+        "quantity": 42,
+        "picture": "Brownie.jpg"
+    },
+    {
+        "id": 3,
+        "itemName": "Cake Pop",
+         "category": 0,
+        "price": 1.35,
+        "quantity": 24,
+        "picture": "Cake Pop.jpg"
+    },
+    {
+        "id": 8,
+        "itemName": "Jacket",
+        "category": 0,
+        "price": 4,
+        "quantity": 0,
+        "picture": "Jacket.jpg"
+    },
+    {
+        "id": 2,
+        "itemName": "Muffin",
+        "category": 0,
+        "price": 1,
+        "quantity": 36,
+        "picture": "Muffin.jpg"
+    },
+    {
+        "id": 7,
+        "itemName": "Pants",
+        "description": null,
+        "price": 3,
+        "quantity": 0,
+        "picture": "Pants.jpg"
+    },
+    {
+        "id": 6,
+        "itemName": "Shirt",
+         "category": 0,
+        "price": 2,
+        "quantity": 0,
+        "picture": "Shirt.jpg"
+    },
+    {
+        "id": 9,
+        "itemName": "Toy",
+        "category": 0,
+        "price": 1,
+        "quantity": 0,
+        "picture": "Toy.jpg"
+    },
+    {
+        "id": 5,
+        "itemName": "Water",
+         "category": 0,
+        "price": 1.5,
+        "quantity": 30,
+        "picture": "Water.jpg"
+    }
+]
